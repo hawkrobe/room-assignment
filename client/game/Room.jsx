@@ -59,16 +59,16 @@ export default class Room extends React.Component {
       }
     });
 
-    const classNameRoom = isDeck ? "deck pt-elevation-1" : "room";
-    const classNameHovered = hovered ? "pt-elevation-3" : "";
+    const classNameRoom = isDeck ? "deck bp3-elevation-1" : "room";
+    const classNameHovered = hovered ? "bp3-elevation-3" : "";
     return (
       <div
         onDrop={this.handleDrop}
         onDragOver={this.handleDragOver}
         onDragLeave={this.handleDragLeave}
-        className={`pt-card ${classNameRoom} ${classNameHovered}`}
+        className={`bp3-card ${classNameRoom} ${classNameHovered}`}
       >
-        {isDeck ? null : <h6>Room {room}</h6>}
+        {isDeck ? null : <h6 className='bp3-heading'>Room {room}</h6>}
         {students.map(student => (
           <Student
             onDragStart={this.handleDragStart}

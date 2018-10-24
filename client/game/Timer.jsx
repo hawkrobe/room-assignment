@@ -19,7 +19,7 @@ class timer extends React.Component {
 
     return (
       <div className={classes.join(" ")}>
-        <h5>Timer</h5>
+        <h5 className='bp3-heading'>Timer</h5>
         <span className="seconds">{minutes}:{seconds}</span>
       </div>
     );

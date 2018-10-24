@@ -7,11 +7,6 @@ import Empirica from "meteor/empirica:core";
 // the game.
 Empirica.onGameStart((game, players) => {
   console.debug("game ", game._id, " started");
-  //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
-  game.set("cumulativeScore", 0); // the total score at the end of the game
-  game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
-  game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
-  game.set("team", players.length > 1);
 
   const names = ["Blue", "Green", "Pink", "Yellow"]; // for the players names to match avatar color
   const avatarNames = ["Colton", "Aaron", "Alex", "Tristan"]; // to do more go to https://jdenticon.com/#icon-D3
@@ -35,12 +30,11 @@ Empirica.onRoundStart((game, round, players) => {});
 Empirica.onStageStart((game, round, stage, players) => {
   console.debug("Round ", stage.name, "game", game._id, " started");
   const team = game.get("team");
+  console.log("is it team?", team);
 
   //initiate the score for this round (because everyone will have the same score, we can save it at the round object
   stage.set("score", 0);
-  if (team) {
-    stage.set("chat", []);
-  }
+  stage.set("chat", []); //todo: I need to check if they are in team first
   stage.set("log", [
     {
       verb: "roundStarted",

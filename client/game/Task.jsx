@@ -2,6 +2,7 @@ import React from "react";
 
 import Room from "./Room.jsx";
 import Timer from "./Timer.jsx";
+import {HTMLTable} from "@blueprintjs/core";
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -56,9 +57,9 @@ export default class Task extends React.Component {
           <div className="info">
             <Timer stage={stage} />
             <div className="score">
-              <h5>Score</h5>
+              <h5 className='bp3-heading'>Score</h5>
 
-              <h2>{stage.get("score")}</h2>
+              <h2 className='bp3-heading'>{stage.get("score")}</h2>
             </div>
           </div>
 
@@ -72,16 +73,16 @@ export default class Task extends React.Component {
             ) : (
               ""
             )}
-            <h5>Constraints</h5>
+            <h5 className='bp3-heading'>Constraints</h5>
             <ul>
               {task.constraints.map(constraint => {
                 const failed = violatedConstraints.includes(constraint._id);
                 return (
                   <li key={constraint._id} className={failed ? "failed" : ""}>
                     {failed ? (
-                      <span className="pt-icon-standard pt-icon-cross" />
+                      <span className="bp3-icon-standard bp3-icon-cross" />
                     ) : (
-                      <span className="pt-icon-standard pt-icon-dot" />
+                      <span className="bp3-icon-standard bp3-icon-dot" />
                     )}
                     {constraint.pair.join(" and ")} {constraint.text}.
                   </li>
@@ -91,8 +92,8 @@ export default class Task extends React.Component {
           </div>
 
           <div className="payoff">
-            <h5>Payoff</h5>
-            <table className="pt-table">
+            <h5 className='bp3-heading'>Payoff</h5>
+            <HTMLTable className="bp3-table">
               <thead>
                 <tr>
                   <th>Rooms</th>
@@ -118,7 +119,7 @@ export default class Task extends React.Component {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </HTMLTable>
           </div>
         </div>
 
@@ -148,8 +149,8 @@ export default class Task extends React.Component {
           <div className="response">
               <button
                 type="button"
-                className={`pt-button pt-icon-cross pt-intent-danger pt-large ${
-                  player.get("satisfied") ? "pt-minimal" : ""
+                className={`bp3-button bp3-icon-cross bp3-intent-danger bp3-large ${
+                  player.get("satisfied") ? "bp3-minimal" : ""
                 }`}
                 onClick={this.handleSatisfaction.bind(this, false)}
                 disabled={!this.state.activeButton}
@@ -158,8 +159,8 @@ export default class Task extends React.Component {
               </button>
             <button
               type="button"
-              className={`pt-button pt-icon-tick pt-intent-success pt-large ${
-                player.get("satisfied") ? "" : "pt-minimal"
+              className={`bp3-button bp3-icon-tick bp3-intent-success bp3-large ${
+                player.get("satisfied") ? "" : "bp3-minimal"
               }`}
               onClick={this.handleSatisfaction.bind(this, true)}
               disabled={!this.state.activeButton}

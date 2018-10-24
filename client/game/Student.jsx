@@ -74,7 +74,7 @@ export default class Student extends React.Component {
         className="student"
         style={cursorStyle}
       >
-        {/* <span className="icon pt-icon-standard pt-icon-person" /> */}
+        {/* <span className="icon bp3-icon-standard bp3-icon-person" /> */}
         <span className="icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
             <path

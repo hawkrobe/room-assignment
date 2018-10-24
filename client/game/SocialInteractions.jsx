@@ -8,13 +8,13 @@ export default class SocialInteractions extends React.Component {
       <div className="player" key={player._id}>
         <span className="image">
           <span
-            className={`satisfied pt-tag pt-round ${
-              player.get("satisfied") ? "pt-intent-success" : "pt-intent-danger"
+            className={`satisfied bp3-tag bp3-round ${
+              player.get("satisfied") ? "bp3-intent-success" : "bp3-intent-danger"
             }`}
           >
             <span
-              className={`pt-icon-standard ${
-                player.get("satisfied") ? "pt-icon-tick" : "pt-icon-cross"
+              className={`bp3-icon-standard ${
+                player.get("satisfied") ? "bp3-icon-tick" : "bp3-icon-cross"
               }`}
             />
           </span>
@@ -49,15 +49,15 @@ export default class SocialInteractions extends React.Component {
     return (
       <div className="social-interactions">
         <div className="status">
-          <div className="players pt-card">
+          <div className="players bp3-card">
             {this.renderPlayer(player, true)}
             {otherPlayers.map(p => this.renderPlayer(p))}
           </div>
 
-          <div className="total-score pt-card">
-            <h6>Total Score</h6>
+          <div className="total-score bp3-card">
+            <h6 className='bp3-heading'>Total Score</h6>
 
-            <h2>{game.get("cumulativeScore") || 0}</h2>
+            <h2 className='bp3-heading'>{game.get("cumulativeScore") || 0}</h2>
           </div>
         </div>
 

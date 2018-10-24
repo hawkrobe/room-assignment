@@ -20,18 +20,19 @@ Empirica.gameInit((game, treatment, players) => {
     _.pluck(players, "id")
   );
 
-  //we don't know the sequence yet
-  let taskSequence = game.treatment.StepOne ? stepOneData : stepTwoData;
+  //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
+  game.set("cumulativeScore", 0); // the total score at the end of the game
+  game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
+  game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
+  game.set("team", players.length > 1);
 
-  if (game.treatment.taskOrder === "shuffle") {
+  //we don't know the sequence yet
+  let taskSequence = game.treatment.stepOne ? stepOneData : stepTwoData;
+
+  if (game.treatment.shuffleTaskOrder) {
     //TODO: I need to make sure that I keep the first task fixed (if it has training)
     //taskSequence = _.shuffle(taskSequence); //this is full shuffle
     taskSequence = customShuffle(taskSequence); //this is with keeping the first practice round fixed
-  }
-  if (game.treatment.taskOrder === "reverse") {
-    console.log("reversing the order of the tasks");
-    //the .slice() so it does not mutate the actually array (i.e., next time it seems to effect the server code)
-    taskSequence = taskSequence.slice().reverse();
   }
 
   //we'll have 1 round, each task is one stage
