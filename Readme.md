@@ -1,89 +1,90 @@
-# Room Assignment
+# Room Assignment Problem
 
-_This project was generated with [create-empirica-app](https://github.com/empiricaly/create-empirica-app)._
+This is an experiment powered by
+[Empirica](https://github.com/empiricaly/empirica) (here is a basic
+[tutorial](https://github.com/empiricaly/tutorials/tree/master/guess-correlation-tutorial)).
+Through this experiment we attempt to answer the question: **How does team
+composition affect team performance?**
 
-## Getting started
+## Experiment Details:
 
-To run this project locally, run the local server:
+### The task
 
-```sh
-meteor
+In this experiment, participants are asked to assign N students into M rooms to
+maximize utility while respecting certain constraints. The task difficulty can
+vary in complexity levels:
+
+* High complexity: Assign 9 students to 6 rooms given 8 constraints
+* Low complexity: Assign 6 students to 4 rooms given 2 constraints
+
+When the task is performed in groups then:
+
+* All participants can do the assignment simultaneously, however, ony one
+  student can be moved by one player at any given time (i.e., locking the
+  student being moved, but the others are free to be moved).
+* Participants can chat freely using the in-experiment chatting system.
+* All events (i.e., which student being assigned to which room etc) will be
+  logged and announced in the experiment as they happen.
+
+### Procedure
+
+In the planned experiment, **in step 1** each participants will be asked to
+complete a number of room assignment tasks and other test questions (e.g., read
+emotions from eyes tests) individually. This will allow us to determine 3
+attributes about the individual:
+
+* Ability: measured by the performance in the game.
+* Social Perceptiveness (SP): Measured through
+  [Reading Emotions from Eye (RME)](https://github.com/amaatouq/RME_test) test.
+* Cognitive Style (CS): an in-task measure of problem-solving style (e.g.,
+  intuitive versus analytical).
+
+Then, **in step 2**, we randomly construct teams of 3 participants.
+
+## Experiment Demo:
+You and a group of friends can play with this experiment as we ran it by following these instructions (assuming you have [Meteor installed](https://www.meteor.com/install)):
+
+1. [Download](https://github.com/amaatouq/room-assigment.git) the repository (and unzip). Alternatively, from terminal just run:
+
+```ssh
+git clone https://github.com/amaatouq/room-assigment
 ```
 
-## Introduction
+2. Go into the folder with `cd room-assigment`
+3. Install the required dependencies `meteor npm install`
+4. Edit the `admin` password in the settings file `local.json` to something you like.
+5. Run the local instance with `meteor --settings local.json`
+6. Go to `http://localhost:3000/admin` (or whatever port you are running Meteor on).
+7. login with the credentials username: `admin` and the password you have in `local.json`
+8. Start a new batch with whatever configuration you want (see the example configuration).
 
-Your Empirica experiment is built with [Meteor](https://www.meteor.com/) web
-development framework. All your code will be split in 2 main categories: code
-running on the **client** (the browser) and code running on the **server**.
-This functional seperation is immediately reflected in the folders structure.
+### Example Config:
 
-### Client
+First, you have to enter the Configuration mode instead of the Monitoring model in the admin UI.
 
-All code in the `/client` directory will be ran on the client. The entry point
-for your app on the client can be found in `/client/main.js`. In there you will
-find more details about how to customize how a game _Round_ should be rendered,
-what _Consent_ message and which _Intro Steps_ you want to present the players
-with, etc.
+![config-mode][config-mode-image]
 
-The HTML root of you app in `/client/main.html` shouldn't generally be changed
-much, other than to update the app's HTML `<head>`, which contains the app's
-title, and possibly 3rd party JS and CSS imports.
+[config-mode-image]: ./readme_screenshots/configuration_mode.png
 
-All styling starts in `/client/main.less`, and is written in
-[LESS](http://lesscss.org/), a simple superset of CSS. You can also add a plain
-CSS files in `/client`.
+This will allow you to configure the experiment: Factors, Lobby, and Treatments. Now, you have the option to create your own configuration (see below) or load an example configuration by clicking on `import` and then choosing the file `./example-config.yaml`.
+Loading the example configurations will choose some example values for the factors (i.e., independent variables), lobby configuration, and few treatments.
 
-The `/client/game`, `/client/intro`, `/client/exit` directories all contain
-[React](https://reactjs.org/) components, which compose the UI of your app.
-If you are new to React, we recommend you try out the official
-[React Tutorial](https://reactjs.org/tutorial/tutorial.html).
+Now, you can go back to the Monitoring mode:
 
-### Server
+![monitoring-mode][monitoring-mode-image]
 
-Server-side code all starts in the `/server/main.js` file. In that file, we set
-an important Empirica integration point, the `Empirica.gameInit`, which allows
-to configure each game as they are initiated by Empirica.
+[monitoring-mode-image]: ./readme_screenshots/monitoring_mode.png
 
-From there we import 2 other files. First the `/server/callback.js` file, which
-contains all the possible callbacks used in the lifecycle of a game. These
-callbacks, such as `onRoundEnd`, offer powerful ways to add logic to a game in a
-central point (the server), which is often preferable to adding all the logic on
-the client.
+Now the **_Batchs_** tab make sure you add a new batch, add the treatments you want, choose your lobby configurations, and then **_start_** the batch.
 
-Finally, the `/server/bots.js` file is where you can add bot definitions
-to your app.
+![batches][batches-img]
 
-### Public
+[batches-img]: ./readme_screenshots/new_batch.png
 
-The `/public` is here to host any static assets you might need in the game, such
-as images. For example, if you add an image at `/public/my-logo.jpeg`, it will
-be available in the app at `http://localhost:3000/my-logo.jpeg`.
+Go to `http://localhost:3000/` and enjoy! If you don't have 3 friends to play with you, you always can use the `new player` button in development (for more details see this), which can add an arbitrary number players to the experiment while staying in the same browser (i.e., no need to open different browsers).
 
-### Settings
+![game][game-img]
 
-We generated a basic settings file (`/local.json`), which should originally only
-contain configuration for admin login. More documentation for settings is coming
-soon.
+[game-img]: ./readme_screenshots/game.png
 
-You can run the app with the settings like this:
 
-```sh
-meteor --settings local.json
-```
-
-## Updating Empirica Core
-
-As new versions of Empirica become available, you might want to update the
-version you are using in your app. To do so, simply run:
-
-```sh
-meteor update empirica:core
-```
-
-## Learn more
-
-- Empirica Website: https://empirica.ly/
-- Meteor Tutorial: https://www.meteor.com/tutorials/react/creating-an-app
-- React Tutorial: https://reactjs.org/tutorial/tutorial.html
-- LESS Intro: http://lesscss.org/#overview
-- JavaScript Tutorial: https://javascript.info/
