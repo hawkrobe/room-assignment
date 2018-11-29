@@ -44,13 +44,13 @@ Then, **in step 2**, we randomly construct teams of 3 participants.
 ## Experiment Demo:
 You and a group of friends can play with this experiment as we ran it by following these instructions (assuming you have [Meteor installed](https://www.meteor.com/install)):
 
-1. [Download](https://github.com/amaatouq/room-assigment.git) the repository (and unzip). Alternatively, from terminal just run:
+1. [Download](https://github.com/amaatouq/room-assignment.git) the repository (and unzip). Alternatively, from terminal just run:
 
 ```ssh
-git clone https://github.com/amaatouq/room-assigment
+git clone https://github.com/amaatouq/room-assignment
 ```
 
-2. Go into the folder with `cd room-assigment`
+2. Go into the folder with `cd room-assignment`
 3. Install the required dependencies `meteor npm install`
 4. Edit the `admin` password in the settings file `local.json` to something you like.
 5. Run the local instance with `meteor --settings local.json`
