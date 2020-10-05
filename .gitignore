@@ -10,3 +10,4 @@ local.json
 **/.idea
 **.idea
 .DS_Store
+deployment.json
