@@ -2,7 +2,7 @@ import React from "react";
 
 import Room from "./Room.jsx";
 import Timer from "./Timer.jsx";
-import {HTMLTable} from "@blueprintjs/core";
+import { HTMLTable } from "@blueprintjs/core";
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -41,7 +41,8 @@ export default class Task extends React.Component {
       verb: "playerSatisfaction",
       subjectId: player._id,
       state: satisfied ? "satisfied" : "unsatisfied",
-      at: new Date()
+      // change with timesync package
+      at: new Date(),
     });
   };
 
@@ -57,9 +58,9 @@ export default class Task extends React.Component {
           <div className="info">
             <Timer stage={stage} />
             <div className="score">
-              <h5 className='bp3-heading'>Score</h5>
+              <h5 className="bp3-heading">Score</h5>
 
-              <h2 className='bp3-heading'>{stage.get("score")}</h2>
+              <h2 className="bp3-heading">{stage.get("score")}</h2>
             </div>
           </div>
 
@@ -73,9 +74,9 @@ export default class Task extends React.Component {
             ) : (
               ""
             )}
-            <h5 className='bp3-heading'>Constraints</h5>
+            <h5 className="bp3-heading">Constraints</h5>
             <ul>
-              {task.constraints.map(constraint => {
+              {task.constraints.map((constraint) => {
                 const failed = violatedConstraints.includes(constraint._id);
                 return (
                   <li key={constraint._id} className={failed ? "failed" : ""}>
@@ -92,19 +93,21 @@ export default class Task extends React.Component {
           </div>
 
           <div className="payoff">
-            <h5 className='bp3-heading'>Payoff</h5>
+            <h5 className="bp3-heading">Payoff</h5>
             <HTMLTable className="bp3-table">
               <thead>
                 <tr>
                   <th>Rooms</th>
-                  {task.rooms.map(room => <th key={room}>{room}</th>)}
+                  {task.rooms.map((room) => (
+                    <th key={room}>{room}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {task.students.map(student => (
+                {task.students.map((student) => (
                   <tr key={student}>
                     <th>Student {student}</th>
-                    {task.rooms.map(room => (
+                    {task.rooms.map((room) => (
                       <td
                         className={
                           stage.get(`student-${student}-room`) === room
@@ -134,7 +137,7 @@ export default class Task extends React.Component {
             />
 
             <div className="rooms">
-              {task.rooms.map(room => (
+              {task.rooms.map((room) => (
                 <Room
                   key={room}
                   room={room}
@@ -147,16 +150,16 @@ export default class Task extends React.Component {
           </div>
 
           <div className="response">
-              <button
-                type="button"
-                className={`bp3-button bp3-icon-cross bp3-intent-danger bp3-large ${
-                  player.get("satisfied") ? "bp3-minimal" : ""
-                }`}
-                onClick={this.handleSatisfaction.bind(this, false)}
-                disabled={!this.state.activeButton}
-              >
-                Unsatisfied
-              </button>
+            <button
+              type="button"
+              className={`bp3-button bp3-icon-cross bp3-intent-danger bp3-large ${
+                player.get("satisfied") ? "bp3-minimal" : ""
+              }`}
+              onClick={this.handleSatisfaction.bind(this, false)}
+              disabled={!this.state.activeButton}
+            >
+              Unsatisfied
+            </button>
             <button
               type="button"
               className={`bp3-button bp3-icon-tick bp3-intent-success bp3-large ${

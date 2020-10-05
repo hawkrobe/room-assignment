@@ -1,6 +1,7 @@
 import React from "react";
 import EventLog from "./EventLog";
-import ChatLog from "./ChatLog";
+import { Chat } from "@empirica/chat";
+import TimeSync from "timesync";
 
 export default class SocialInteractions extends React.Component {
   renderPlayer(player, self = false) {
@@ -9,7 +10,9 @@ export default class SocialInteractions extends React.Component {
         <span className="image">
           <span
             className={`satisfied bp3-tag bp3-round ${
-              player.get("satisfied") ? "bp3-intent-success" : "bp3-intent-danger"
+              player.get("satisfied")
+                ? "bp3-intent-success"
+                : "bp3-intent-danger"
             }`}
           >
             <span
@@ -33,17 +36,17 @@ export default class SocialInteractions extends React.Component {
   render() {
     const { game, stage, player } = this.props;
 
-    const otherPlayers = _.reject(game.players, p => p._id === player._id);
+    const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     console.log("otherPlayers", otherPlayers);
     console.log("chat", stage.get("chat"));
     console.log("log", stage.get("log"));
     const messages = stage.get("chat").map(({ text, playerId }) => ({
       text,
-      subject: game.players.find(p => p._id === playerId)
+      subject: game.players.find((p) => p._id === playerId),
     }));
     const events = stage.get("log").map(({ subjectId, ...rest }) => ({
-      subject: subjectId && game.players.find(p => p._id === subjectId),
-      ...rest
+      subject: subjectId && game.players.find((p) => p._id === subjectId),
+      ...rest,
     }));
 
     return (
@@ -51,18 +54,21 @@ export default class SocialInteractions extends React.Component {
         <div className="status">
           <div className="players bp3-card">
             {this.renderPlayer(player, true)}
-            {otherPlayers.map(p => this.renderPlayer(p))}
+            {otherPlayers.map((p) => this.renderPlayer(p))}
           </div>
 
           <div className="total-score bp3-card">
-            <h6 className='bp3-heading'>Total Score</h6>
+            <h6 className="bp3-heading">Total Score</h6>
 
-            <h2 className='bp3-heading'>{game.get("cumulativeScore") || 0}</h2>
+            <h2 className="bp3-heading">{game.get("cumulativeScore") || 0}</h2>
           </div>
         </div>
 
         <EventLog events={events} stage={stage} player={player} />
-        <ChatLog messages={messages} stage={stage} player={player} />
+        <div className="chat bp3-card">
+          <Chat player={player} scope={stage} timeStamp={new Date()} />
+          {/* timeStamp={new Date()} */}
+        </div>
       </div>
     );
   }

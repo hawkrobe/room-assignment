@@ -3,8 +3,6 @@ import { render } from "react-dom";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 
-
-
 import Empirica from "meteor/empirica:core";
 
 import Consent from "./intro/Consent.jsx";

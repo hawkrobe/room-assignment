@@ -12,19 +12,19 @@ import { stepOneData, stepTwoData } from "./constants";
 // rounds and stages (with get/set methods), that will be able to use later in
 // the game.
 
-Empirica.gameInit((game, treatment, players) => {
+Empirica.gameInit((game, treatment) => {
   console.log(
     "Game with a treatment: ",
     treatment,
     " will start, with workers",
-    _.pluck(players, "id")
+    _.pluck(game.players, "id")
   );
 
   //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
   game.set("cumulativeScore", 0); // the total score at the end of the game
   game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
   game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
-  game.set("team", players.length > 1);
+  game.set("team", game.playerCount > 1);
 
   //we don't know the sequence yet
   let taskSequence = game.treatment.stepOne ? stepOneData : stepTwoData;
@@ -37,11 +37,11 @@ Empirica.gameInit((game, treatment, players) => {
 
   //we'll have 1 round, each task is one stage
   const round = game.addRound();
-  _.times(taskSequence.length, i => {
+  _.times(taskSequence.length, (i) => {
     const stage = round.addStage({
       name: i === 0 ? "practice" : i,
       displayName: taskSequence[i].difficulty,
-      durationInSeconds: game.treatment.stageDuration
+      durationInSeconds: game.treatment.stageDuration,
     });
     stage.set("task", taskSequence[i]);
   });

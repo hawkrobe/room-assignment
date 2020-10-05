@@ -2,6 +2,7 @@ import React from "react";
 
 import SocialInteractions from "./SocialInteractions.jsx";
 import Task from "./Task.jsx";
+import { Chat } from "@empirica/chat";
 
 const roundSound = new Audio("experiment/round-sound.mp3");
 const gameSound = new Audio("experiment/bell.mp3");
@@ -27,7 +28,8 @@ export default class Round extends React.Component {
         {/*game.player.length is a better check for social interaction than 'game.treatment.playerCount > 1' because of the lobby --> ignor settings*/}
         {game.players.length > 1 ? (
           <SocialInteractions game={game} stage={stage} player={player} />
-        ) : null}
+        ) : // <Chat player={player} scope={stage} />
+        null}
       </div>
     );
   }
