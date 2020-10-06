@@ -22,38 +22,32 @@ export default class GroupQuiz extends React.Component {
     mc_2_103: false,
     mc_2_104: false,
     mc_2_105: false,
-    emptyOption: "",
-    num_players: 0,
+    emptyOption: ""
   };
 
-  componentDidMount() {
-    const { game } = this.props;
-    this.state.num_players = game.treatment.playerCount;
-  }
-
-  handleChange = (event) => {
+  handleChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value.trim().toLowerCase() });
   };
 
-  handleRadioChange = (event) => {
+  handleRadioChange = event => {
     const el = event.currentTarget;
     console.log("el", el);
     console.log("ev", event);
     this.setState({ [el.name]: el.value });
   };
 
-  handleEnabledChange = (event) => {
+  handleEnabledChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: !this.state[el.name] });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     //it should be this.state.nParticipants !== "3" but we don't have "treatment" in QUIZ
     if (
-      this.state.nParticipants !== this.state.num_players.toString() ||
+      this.state.nParticipants !== "3" ||
       this.state.scoreOption !== "all" ||
       this.state.idle !== "100" ||
       this.state.largeError !== "0" ||
@@ -71,7 +65,7 @@ export default class GroupQuiz extends React.Component {
     ) {
       AlertToaster.show({
         message:
-          "Sorry, you have one or more mistakes. Please ensure that you answer the questions correctly, or go back to the instructions",
+          "Sorry, you have one or more mistakes. Please ensure that you answer the questions correctly, or go back to the instructions"
       });
     } else {
       this.props.onNext();
@@ -80,7 +74,6 @@ export default class GroupQuiz extends React.Component {
 
   render() {
     const { hasPrev, onPrev } = this.props;
-    const { stage, player, game } = this.props;
     return (
       <Centered>
         <div className="quiz">
@@ -91,7 +84,6 @@ export default class GroupQuiz extends React.Component {
                 How many participants will play at the same time, including
                 yourself?
               </label>
-
               <div className="bp3-form-content">
                 <input
                   id="nParticipants"
